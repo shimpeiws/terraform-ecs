@@ -5,7 +5,7 @@ services:
     image: hashicorp/terraform:0.12.24
     volumes:
       - ./:/workdir
-    working_dir: "/workdir"
+    working_dir: "/workdir/ecs"
     environment:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
