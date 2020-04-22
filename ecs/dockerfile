@@ -1,0 +1,4 @@
+FROM alpine:3.4
+
+WORKDIR /root
+ENTRYPOINT ["/bin/sh", "-c", "while :; do sleep 10; done"]
