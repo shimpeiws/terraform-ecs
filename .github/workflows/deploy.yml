@@ -7,8 +7,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: cd to ecs
-        run: cd ./ecs && ls -l
       - name: Build docker file
         run: |
-          docker build -t blank-container .
+          docker build -t blank-container ./ecs
