@@ -1,3 +1,5 @@
+variable "image_uri" {}
+
 data "aws_iam_policy" "ecs_task_execution_role_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
@@ -23,7 +25,7 @@ resource "aws_ecs_task_definition" "example" {
   [
     {
       "name": "example",
-      "image": "607754652120.dkr.ecr.ap-northeast-1.amazonaws.com/blank-container:latest",
+      "image": "${var.image_uri}",
       "essential": true,
       "logConfiguration": {
         "logDriver": "awslogs",
@@ -42,6 +44,7 @@ resource "aws_ecs_task_definition" "example" {
     }
   ]
   DEFINITION
+
   task_role_arn =  module.ecs_task_execution_role.iam_role_arn
   execution_role_arn = module.ecs_task_execution_role.iam_role_arn
 }
