@@ -9,8 +9,6 @@ jobs:
         uses: actions/checkout@v1
       - name: cd to ecs
         run: cd ./ecs
-      - name: cd to ecs
-        run: cd ./ecs
       - name: Build docker file
         run: |
           docker build -t blank-container .
