@@ -9,4 +9,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Build docker file
         run: |
-          docker build -t blank-container ./ecs
+          TAG_NAME=GITHUB_SHA
+          CONTAINER_NAME=blank-container
+          docker build -t ${CONTAINER_NAME} ./ecs
+          docker tag ${CONTAINER_NAME}:${TAG_NAME} ${{ secrets.ECR_REPOSITORY_URL }}/${CONTAINER_NAME}:${TAG_NAME}
