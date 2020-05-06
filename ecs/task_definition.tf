@@ -1,3 +1,5 @@
+variable "image_uri" {}
+
 data "aws_iam_policy" "ecs_task_execution_role_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
@@ -19,7 +21,30 @@ resource "aws_ecs_task_definition" "example" {
   memory                   = "512"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  container_definitions    = file("./container_definitions.json")
+  container_definitions =<<DEFINITION
+  [
+    {
+      "name": "example",
+      "image": "${var.image_uri}",
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "blank-container",
+          "awslogs-group": "/ecs/example"
+        }
+      },
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ]
+    }
+  ]
+  DEFINITION
+
   task_role_arn =  module.ecs_task_execution_role.iam_role_arn
   execution_role_arn = module.ecs_task_execution_role.iam_role_arn
 }
