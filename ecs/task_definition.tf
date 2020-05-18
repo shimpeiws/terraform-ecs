@@ -40,7 +40,14 @@ resource "aws_ecs_task_definition" "example" {
           "protocol": "tcp",
           "containerPort": 80
         }
-      ]
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost/ || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "startPeriod": 3,
+        "retries": 3
+      }
     }
   ]
   DEFINITION
