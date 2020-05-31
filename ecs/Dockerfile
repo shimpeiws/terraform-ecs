@@ -1,4 +1,6 @@
-FROM alpine:3.4
+FROM nginx:alpine
 
-WORKDIR /root
-ENTRYPOINT ["/bin/sh", "-c", "while :; echo `date '+%y/%m/%d %H:%M:%S'`; do sleep 10; done"]
+COPY ./scripts /app
+WORKDIR /app
+
+RUN apk add curl
