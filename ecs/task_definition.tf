@@ -42,7 +42,7 @@ resource "aws_ecs_task_definition" "example" {
         }
       ],
       "healthCheck": {
-        "command": ["CMD-SHELL", "curl -f http://localhost/ || exit 1"],
+        "command": ["CMD-SHELL", "sh health-check.sh"],
         "interval": 30,
         "timeout": 5,
         "startPeriod": 3,
