@@ -23,5 +23,5 @@ jobs:
         run: |
           TAG_NAME=${GITHUB_SHA}
           CONTAINER_NAME=blank-container
-          docker build -t ${{ secrets.ECR_REPOSITORY_URL }}/${CONTAINER_NAME}:${TAG_NAME} -f ./ecs
+          docker build -t ${{ secrets.ECR_REPOSITORY_URL }}/${CONTAINER_NAME}:${TAG_NAME} ./ecs
           docker push ${{ secrets.ECR_REPOSITORY_URL }}/${CONTAINER_NAME}:${TAG_NAME}
