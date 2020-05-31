@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-COPY ../src /app
+COPY ./scripts /app
 WORKDIR /app
 
 RUN apk add curl
