@@ -1,1 +1,1 @@
-curl -f http://localhost/ng || exit 1
+curl -f http://localhost || exit 1
